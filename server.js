@@ -33,22 +33,6 @@ app.get('/favicon.ico', (req, res) => {
     res.status(204).end();
 });
 
-// Configuração simples do Livereload (apenas em desenvolvimento)
-if (process.env.NODE_ENV !== 'production') {
-    try {
-        const connectLivereload = require('connect-livereload');
-        
-        // Middleware para injetar o script do livereload
-        app.use(connectLivereload());
-        
-        console.log('🔄 Live reload configurado!');
-        console.log('💡 Dica: Use uma extensão de live reload no navegador para melhor experiência');
-        
-    } catch (error) {
-        console.log('⚠️  Live reload não disponível:', error.message);
-    }
-}
-
 // Middleware de tratamento de erros
 app.use((err, req, res, next) => {
     console.error('Erro no servidor:', err);
@@ -82,8 +66,6 @@ const server = app.listen(port, '0.0.0.0', (err) => {
     
     if (process.env.NODE_ENV !== 'production') {
         console.log(`🌐 Acesse: http://localhost:${port}`);
-        console.log('📝 Modifique os arquivos e veja as mudanças automaticamente!');
-        console.log('🔄 O nodemon reinicia o servidor automaticamente quando você salva arquivos');
     } else {
         console.log('🚀 Aplicação em produção!');
     }
