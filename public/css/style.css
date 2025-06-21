@@ -380,14 +380,15 @@ body {
 
 .service-card {
     background: white;
-    padding: 2rem 4rem;
+    padding: 2rem;
     border-radius: 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     text-align: center;
     transition: transform 0.3s ease;
     cursor: pointer;
-    min-height: 80px;
+    min-height: 120px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1rem;
@@ -402,22 +403,31 @@ body {
 }
 
 .service-icon {
-    font-size: 2rem;
-    width: 2rem;
-    height: 2rem;
+    font-size: 2.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    margin: 0.5rem 0;
 }
 
 .service-title {
     color: #333;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
     margin: 0;
-    flex: 1;
     text-align: center;
+    order: -1; /* Coloca o título primeiro */
+}
+
+.service-subtitle {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0;
+    text-align: center;
+    order: 2; /* Coloca o subtitle por último */
 }
 
 .service-description {
@@ -465,6 +475,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#home-map {
+    width: 100%;
+    height: 400px;
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: #f8f9fa;
 }
 
 .map-placeholder iframe {
@@ -519,18 +538,22 @@ body {
     }
     
     .service-card {
-        padding: 1.5rem 3rem;
-        min-height: 70px;
+        padding: 1.5rem;
+        min-height: 100px;
     }
     
     .service-icon {
-        font-size: 1.8rem;
-        width: 1.8rem;
-        height: 1.8rem;
+        font-size: 2rem;
+        width: 2rem;
+        height: 2rem;
     }
     
     .service-title {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+    }
+    
+    .service-subtitle {
+        font-size: 0.8rem;
     }
     
     .services-section {
@@ -539,6 +562,10 @@ body {
     
     .section-title {
         font-size: 1.3rem;
+    }
+    
+    #home-map {
+        height: 300px;
     }
 }
 
@@ -556,36 +583,34 @@ body {
     }
     
     .service-card {
-        padding: 1.2rem 2rem;
-        min-height: 60px;
+        padding: 1.2rem;
+        min-height: 90px;
     }
     
     .service-icon {
-        font-size: 1.5rem;
-        width: 1.5rem;
-        height: 1.5rem;
+        font-size: 1.8rem;
+        width: 1.8rem;
+        height: 1.8rem;
     }
     
     .service-title {
         font-size: 1rem;
     }
     
+    .service-subtitle {
+        font-size: 0.75rem;
+    }
+    
     .services-section {
-        padding: 1.5rem 0.75rem;
-    }
-    
-    .buttons-container {
-        max-width: 100%;
-        padding: 0 1rem;
-    }
-    
-    .services-grid {
-        max-width: 100%;
-        padding: 0 1rem;
+        padding: 1.5rem 1rem;
     }
     
     .section-title {
         font-size: 1.2rem;
+    }
+    
+    #home-map {
+        height: 250px;
     }
 }
 

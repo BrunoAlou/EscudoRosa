@@ -45,11 +45,14 @@
                 <label class="form-label">Compartilhamento de Localização</label>
                 <div class="location-toggle-container">
                     <div class="toggle-switch">
-                        <input type="checkbox" id="locationToggle" name="shareLocation" value="true" class="toggle-input">
+                        <input type="checkbox" id="locationToggle" name="shareLocation" class="toggle-input">
                         <label for="locationToggle" class="toggle-label">
-                            <span class="toggle-slider"></span>
-                            <span class="toggle-text">Compartilhar localização em tempo real</span>
+                            <div class="toggle-slider"></div>
                         </label>
+                    </div>
+                    <div class="toggle-text-container">
+                        <span class="toggle-text" id="toggleText">Compartilhamento desativado</span>
+                        <span class="toggle-description">Ative para compartilhar sua localização em tempo real</span>
                     </div>
                     <div class="location-status" id="locationStatus">
                         <span class="status-indicator inactive">

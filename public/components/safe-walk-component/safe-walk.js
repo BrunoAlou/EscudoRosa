@@ -83,10 +83,10 @@ class SafeWalkComponent {
             });
         });
 
-        // Configura o checkbox de compartilhar localização
-        const locationCheckbox = document.querySelector('input[name="shareLocation"]');
-        if (locationCheckbox) {
-            locationCheckbox.addEventListener('change', (e) => {
+        // Configura o toggle switch de compartilhamento de localização
+        const locationToggle = document.getElementById('locationToggle');
+        if (locationToggle) {
+            locationToggle.addEventListener('change', (e) => {
                 this.handleLocationSharing(e.target.checked);
             });
         }
@@ -174,21 +174,83 @@ class SafeWalkComponent {
 
     // Gerencia compartilhamento de localização
     handleLocationSharing(enabled) {
+        const toggleText = document.getElementById('toggleText');
+        const locationStatus = document.getElementById('locationStatus');
+        const toggleContainer = document.querySelector('.location-toggle-container');
+        
         if (enabled) {
             console.log('📍 Compartilhamento de localização ativado');
-            // Aqui você pode implementar a lógica de geolocalização
+            
+            // Atualiza texto do toggle
+            if (toggleText) {
+                toggleText.textContent = 'Compartilhamento ativado';
+                toggleText.style.color = '#2ed573';
+            }
+            
+            // Atualiza status
+            if (locationStatus) {
+                locationStatus.innerHTML = `
+                    <span class="status-indicator active">
+                        <i class="fas fa-circle"></i>
+                        Localização ativa
+                    </span>
+                `;
+            }
+            
+            // Atualiza container
+            if (toggleContainer) {
+                toggleContainer.classList.add('active');
+            }
+            
+            // Solicita localização
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
                         console.log('✅ Localização obtida:', position.coords);
+                        // Aqui você pode implementar o envio da localização para os contatos
                     },
                     (error) => {
                         console.error('❌ Erro ao obter localização:', error);
+                        // Reverte o toggle se não conseguir obter localização
+                        this.handleLocationSharing(false);
+                        const locationToggle = document.getElementById('locationToggle');
+                        if (locationToggle) {
+                            locationToggle.checked = false;
+                        }
+                        alert('Não foi possível obter sua localização. Verifique as permissões do navegador.');
                     }
                 );
+            } else {
+                alert('Geolocalização não é suportada pelo seu navegador.');
+                this.handleLocationSharing(false);
+                const locationToggle = document.getElementById('locationToggle');
+                if (locationToggle) {
+                    locationToggle.checked = false;
+                }
             }
         } else {
             console.log('📍 Compartilhamento de localização desativado');
+            
+            // Atualiza texto do toggle
+            if (toggleText) {
+                toggleText.textContent = 'Compartilhamento desativado';
+                toggleText.style.color = '#333';
+            }
+            
+            // Atualiza status
+            if (locationStatus) {
+                locationStatus.innerHTML = `
+                    <span class="status-indicator inactive">
+                        <i class="fas fa-circle"></i>
+                        Localização inativa
+                    </span>
+                `;
+            }
+            
+            // Atualiza container
+            if (toggleContainer) {
+                toggleContainer.classList.remove('active');
+            }
         }
     }
 
