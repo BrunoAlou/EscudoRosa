@@ -58,6 +58,7 @@
     position: relative;
     overflow: hidden;
     border: 2px dashed #adb5bd;
+    margin: 20px 0;
 }
 
 .map-container iframe {
@@ -231,6 +232,10 @@
     background: #ffc107;
 }
 
+.legend-safe {
+    background: #28a745;
+}
+
 .legend-text {
     font-size: 0.9rem;
     font-weight: 500;
@@ -250,5 +255,46 @@
     to { 
         opacity: 1;
         transform: translateY(0) scale(1);
+    }
+}
+
+/* Estilos para marcadores do Leaflet */
+.user-marker {
+    background: transparent !important;
+    border: none !important;
+}
+
+.risk-marker {
+    background: transparent !important;
+    border: none !important;
+}
+
+.safe-marker {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Melhorias no container do mapa */
+#leaflet-map,
+#leaflet-map-options {
+    border: 2px solid #e9ecef;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+    #leaflet-map,
+    #leaflet-map-options {
+        height: 300px !important;
+    }
+    
+    .map-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .map-btn {
+        width: 100%;
+        margin: 0;
     }
 } 

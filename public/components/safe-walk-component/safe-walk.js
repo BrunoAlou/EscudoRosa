@@ -3,6 +3,10 @@ class SafeWalkComponent {
     constructor() {
         this.loadStyles();
         this.loadTemplates();
+        this.contacts = [
+            { id: 'maria-silva', name: 'Maria Silva', relation: 'Mãe' },
+            { id: 'joao-santos', name: 'João Santos', relation: 'Irmão' }
+        ];
     }
 
     // Carrega os estilos CSS
@@ -48,12 +52,10 @@ class SafeWalkComponent {
         overlay.className = 'safe-walk-overlay';
         overlay.innerHTML = this.templates.form;
         document.body.appendChild(overlay);
-        // Handler do formulário
-        const form = document.getElementById('safeWalkForm');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.handleSafeWalkSubmit();
-        });
+        
+        // Configura os event listeners
+        this.setupFormListeners();
+        
         // Fecha ao clicar fora
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay) {
@@ -62,28 +64,175 @@ class SafeWalkComponent {
         });
     }
 
+    // Configura os event listeners do formulário
+    setupFormListeners() {
+        // Handler do formulário
+        const form = document.getElementById('safeWalkForm');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.handleSafeWalkSubmit();
+            });
+        }
+
+        // Configura os checkboxes de contatos
+        const contactCheckboxes = document.querySelectorAll('input[name="contacts"]');
+        contactCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                this.handleContactSelection(e.target);
+            });
+        });
+
+        // Configura o checkbox de compartilhar localização
+        const locationCheckbox = document.querySelector('input[name="shareLocation"]');
+        if (locationCheckbox) {
+            locationCheckbox.addEventListener('change', (e) => {
+                this.handleLocationSharing(e.target.checked);
+            });
+        }
+    }
+
+    // Adiciona novo contato
+    addContact() {
+        const contactName = prompt('Nome do contato:');
+        if (!contactName) return;
+        
+        const contactRelation = prompt('Relação (ex: Mãe, Irmão, Amigo):');
+        if (!contactRelation) return;
+        
+        const contactId = contactName.toLowerCase().replace(/\s+/g, '-');
+        const newContact = {
+            id: contactId,
+            name: contactName,
+            relation: contactRelation
+        };
+        
+        this.contacts.push(newContact);
+        this.updateContactList();
+        
+        console.log('✅ Contato adicionado:', newContact);
+    }
+
+    // Atualiza a lista de contatos
+    updateContactList() {
+        const contactList = document.querySelector('.contact-list');
+        if (!contactList) return;
+        
+        // Remove contatos existentes (exceto os padrões)
+        const existingContacts = contactList.querySelectorAll('.contact-item');
+        existingContacts.forEach(contact => {
+            const checkbox = contact.querySelector('input[name="contacts"]');
+            if (checkbox && !['maria-silva', 'joao-santos'].includes(checkbox.value)) {
+                contact.remove();
+            }
+        });
+        
+        // Adiciona novos contatos
+        this.contacts.forEach(contact => {
+            if (!['maria-silva', 'joao-santos'].includes(contact.id)) {
+                const contactItem = this.createContactItem(contact);
+                contactList.appendChild(contactItem);
+            }
+        });
+    }
+
+    // Cria um item de contato
+    createContactItem(contact) {
+        const contactItem = document.createElement('div');
+        contactItem.className = 'contact-item';
+        contactItem.innerHTML = `
+            <div class="contact-info">
+                <div class="contact-name">${contact.name}</div>
+                <div class="contact-relation">${contact.relation}</div>
+            </div>
+            <label class="contact-checkbox">
+                <input type="checkbox" name="contacts" value="${contact.id}">
+                <span class="checkbox-custom"></span>
+            </label>
+        `;
+        
+        // Adiciona event listener ao novo checkbox
+        const checkbox = contactItem.querySelector('input[name="contacts"]');
+        checkbox.addEventListener('change', (e) => {
+            this.handleContactSelection(e.target);
+        });
+        
+        return contactItem;
+    }
+
+    // Gerencia seleção de contatos
+    handleContactSelection(checkbox) {
+        const contactItem = checkbox.closest('.contact-item');
+        if (checkbox.checked) {
+            contactItem.style.borderColor = '#2ed573';
+            contactItem.style.background = '#f0f8f0';
+        } else {
+            contactItem.style.borderColor = '#e9ecef';
+            contactItem.style.background = '#f8f9fa';
+        }
+    }
+
+    // Gerencia compartilhamento de localização
+    handleLocationSharing(enabled) {
+        if (enabled) {
+            console.log('📍 Compartilhamento de localização ativado');
+            // Aqui você pode implementar a lógica de geolocalização
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        console.log('✅ Localização obtida:', position.coords);
+                    },
+                    (error) => {
+                        console.error('❌ Erro ao obter localização:', error);
+                    }
+                );
+            }
+        } else {
+            console.log('📍 Compartilhamento de localização desativado');
+        }
+    }
+
     // Fallback para formulário
     showFallbackSafeWalkForm() {
         alert('Não foi possível carregar o formulário de caminhada segura.');
     }
 
-    // Seleciona opção
-    selectOption(element, value) {
-        const parent = element.parentElement;
-        parent.querySelectorAll('.option-card').forEach(card => {
-            card.classList.remove('selected');
-        });
-        element.classList.add('selected');
-    }
-
     // Handler para envio do formulário
     handleSafeWalkSubmit() {
         const overlay = document.querySelector('.safe-walk-overlay');
+        
+        // Coleta dados do formulário
+        const selectedContacts = Array.from(document.querySelectorAll('input[name="contacts"]:checked'))
+            .map(checkbox => checkbox.value);
+        const shareLocation = document.querySelector('input[name="shareLocation"]').checked;
+        const busInfo = document.querySelector('input[placeholder*="ônibus"]').value;
+        
+        console.log('📋 Dados do formulário:', {
+            selectedContacts,
+            shareLocation,
+            busInfo
+        });
+        
         if (!this.templates) {
-            overlay.innerHTML = `<div class='safe-walk-modal'><div class='safe-walk-header'><div class='safe-walk-icon'><i class='fas fa-check-circle' style='color: #2ed573;'></i></div><div class='safe-walk-title'>✅ Rota Segura Calculada!</div><div class='safe-walk-subtitle'>Sua rota foi planejada com base nas melhores práticas de segurança</div></div></div>`;
+            overlay.innerHTML = `<div class='safe-walk-modal'><div class='safe-walk-header'><div class='safe-walk-icon'><i class='fas fa-check-circle' style='color: #2ed573;'></i></div><div class='safe-walk-title'>✅ Caminhada Segura Iniciada!</div><div class='safe-walk-subtitle'>Seus contatos foram notificados e sua localização está sendo compartilhada</div></div></div>`;
             return;
         }
+        
         overlay.innerHTML = this.templates.success;
+        
+        // Simula notificação dos contatos
+        this.notifyContacts(selectedContacts);
+    }
+
+    // Notifica contatos selecionados
+    notifyContacts(contactIds) {
+        contactIds.forEach(contactId => {
+            const contact = this.contacts.find(c => c.id === contactId);
+            if (contact) {
+                console.log(`📱 Notificando ${contact.name} (${contact.relation})`);
+                // Aqui você pode implementar a lógica real de notificação
+            }
+        });
     }
 
     // Fecha o formulário

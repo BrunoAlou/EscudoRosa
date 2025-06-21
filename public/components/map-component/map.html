@@ -8,8 +8,8 @@
             <div class="map-icon">
                 <i class="fas fa-map-marked-alt"></i>
             </div>
-            <div class="map-title">🗺️ Mapa de Áreas de Risco</div>
-            <div class="map-subtitle">Visualize áreas com histórico de ocorrências e pontos de segurança</div>
+            <div class="map-title">🗺️ Mapa de Segurança</div>
+            <div class="map-subtitle">Visualize áreas de risco e zonas seguras próximas</div>
         </div>
         <div class="map-controls">
             <button class="map-btn map-btn-primary" onclick="mapComponent.getCurrentLocation()">
@@ -18,17 +18,12 @@
             <button class="map-btn map-btn-secondary" onclick="mapComponent.showRiskAreas()">
                 <i class="fas fa-exclamation-triangle"></i> Áreas de Risco
             </button>
+            <button class="map-btn map-btn-secondary" onclick="mapComponent.showSafeZones()">
+                <i class="fas fa-shield-alt"></i> Zonas Seguras
+            </button>
         </div>
         <div class="map-container">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d59025.56411249518!2d-47.909561!3d-15.800733000000001!3m2!1i1024!2i768!4f13.1!5e1!3m2!1spt-BR!2sbr!4v1750484337915!5m2!1spt-BR!2sbr" 
-                width="100%" 
-                height="300" 
-                style="border:0; border-radius: 10px;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+            <div id="leaflet-map" style="width: 100%; height: 400px; border-radius: 10px;"></div>
         </div>
         <div class="risk-legend">
             <div class="legend-item">
@@ -42,6 +37,10 @@
             <div class="legend-item">
                 <div class="legend-dot legend-medium"></div>
                 <span class="legend-text">Médio Risco</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot legend-safe"></div>
+                <span class="legend-text">Zona Segura</span>
             </div>
         </div>
     </div>
@@ -57,7 +56,7 @@
             <div class="map-icon">
                 <i class="fas fa-map-marked-alt"></i>
             </div>
-            <div class="map-title">🗺️ Mapa de Áreas de Risco + Opções</div>
+            <div class="map-title">🗺️ Mapa de Segurança + Opções</div>
             <div class="map-subtitle">Visualize riscos e escolha ações de segurança</div>
         </div>
         <div class="map-controls">
@@ -72,15 +71,7 @@
             </button>
         </div>
         <div class="map-container">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d59025.56411249518!2d-47.909561!3d-15.800733000000001!3m2!1i1024!2i768!4f13.1!5e1!3m2!1spt-BR!2sbr!4v1750484337915!5m2!1spt-BR!2sbr" 
-                width="100%" 
-                height="300" 
-                style="border:0; border-radius: 10px;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+            <div id="leaflet-map-options" style="width: 100%; height: 400px; border-radius: 10px;"></div>
         </div>
         <div class="risk-legend">
             <div class="legend-item">
@@ -94,6 +85,10 @@
             <div class="legend-item">
                 <div class="legend-dot legend-medium"></div>
                 <span class="legend-text">Médio Risco</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot legend-safe"></div>
+                <span class="legend-text">Zona Segura</span>
             </div>
         </div>
     </div>
