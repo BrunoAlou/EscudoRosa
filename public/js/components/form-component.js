@@ -1,10 +1,10 @@
-// Componente de Formulário para "Insegurança"
+// Componente de Formulario para "Inseguranca" e "Fazer denuncia"
 class FormComponent {
     constructor() {
         this.createFormStyles();
     }
 
-    // Cria os estilos CSS para o formulário
+    // Cria os estilos CSS para o formulario
     createFormStyles() {
         if (!document.getElementById('form-styles')) {
             const style = document.createElement('style');
@@ -22,17 +22,15 @@ class FormComponent {
                     align-items: center;
                     z-index: 10000;
                     animation: fadeIn 0.3s ease;
-                    overflow-y: auto;
-                    padding: 1rem;
                 }
 
                 .form-modal {
                     background: white;
                     border-radius: 20px;
                     padding: 2rem;
-                    max-width: 600px;
-                    width: 100%;
-                    max-height: 90vh;
+                    max-width: 500px;
+                    width: 90%;
+                    max-height: 80vh;
                     overflow-y: auto;
                     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
                     animation: slideIn 0.3s ease;
@@ -45,7 +43,7 @@ class FormComponent {
 
                 .form-icon {
                     font-size: 3rem;
-                    color: #6c757d;
+                    color: #007bff;
                     margin-bottom: 1rem;
                 }
 
@@ -83,7 +81,7 @@ class FormComponent {
 
                 .form-input:focus, .form-textarea:focus, .form-select:focus {
                     outline: none;
-                    border-color: #667eea;
+                    border-color: #007bff;
                 }
 
                 .form-textarea {
@@ -109,13 +107,13 @@ class FormComponent {
                 }
 
                 .form-btn-primary {
-                    background: linear-gradient(135deg, #6c757d, #495057);
+                    background: linear-gradient(135deg, #007bff, #0056b3);
                     color: white;
                 }
 
                 .form-btn-primary:hover {
                     transform: translateY(-2px);
-                    box-shadow: 0 8px 25px rgba(108, 117, 125, 0.4);
+                    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
                 }
 
                 .form-btn-secondary {
@@ -129,99 +127,75 @@ class FormComponent {
                     color: #333;
                 }
 
-                .form-close {
-                    position: absolute;
-                    top: 1rem;
-                    right: 1rem;
-                    background: none;
-                    border: none;
-                    font-size: 1.5rem;
-                    color: #666;
-                    cursor: pointer;
-                    padding: 0.5rem;
-                    border-radius: 50%;
-                    transition: background 0.3s ease;
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
                 }
 
-                .form-close:hover {
-                    background: #f8f9fa;
-                }
-
-                .form-modal {
-                    position: relative;
+                @keyframes slideIn {
+                    from { 
+                        opacity: 0;
+                        transform: translateY(-50px) scale(0.9);
+                    }
+                    to { 
+                        opacity: 1;
+                        transform: translateY(0) scale(1);
+                    }
                 }
             `;
             document.head.appendChild(style);
         }
     }
 
-    // Mostra formulário de insegurança
+    // Mostra formulario de inseguranca
     showInsecurityForm() {
         const overlay = document.createElement('div');
         overlay.className = 'form-overlay';
         
         overlay.innerHTML = `
             <div class="form-modal">
-                <button class="form-close" onclick="formComponent.closeForm()">
-                    <i class="fas fa-times"></i>
-                </button>
-                
                 <div class="form-header">
                     <div class="form-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <div class="form-title">🛡️ Relatar Insegurança</div>
-                    <div class="form-subtitle">Conte-nos sobre a situação que está causando insegurança</div>
+                    <div class="form-title">Reportar Inseguranca</div>
+                    <div class="form-subtitle">Ajude-nos a melhorar a seguranca da area</div>
                 </div>
-
+                
                 <form id="insecurityForm">
                     <div class="form-group">
-                        <label class="form-label">Tipo de Situação</label>
+                        <label class="form-label">Tipo de Inseguranca</label>
                         <select class="form-select" required>
-                            <option value="">Selecione uma opção</option>
-                            <option value="assédio">Assédio</option>
-                            <option value="ameaça">Ameaça</option>
-                            <option value="perseguição">Perseguição</option>
-                            <option value="violência">Violência</option>
+                            <option value="">Selecione uma opcao</option>
+                            <option value="assalto">Assalto</option>
+                            <option value="violencia">Violencia</option>
+                            <option value="iluminacao">Falta de Iluminacao</option>
+                            <option value="pessoas-suspeitas">Pessoas Suspeitas</option>
                             <option value="outro">Outro</option>
                         </select>
                     </div>
-
+                    
                     <div class="form-group">
-                        <label class="form-label">Localização</label>
-                        <input type="text" class="form-input" placeholder="Rua, bairro, cidade..." required>
+                        <label class="form-label">Localizacao</label>
+                        <input type="text" class="form-input" placeholder="Endereco ou ponto de referencia" required>
                     </div>
-
+                    
                     <div class="form-group">
                         <label class="form-label">Data e Hora</label>
                         <input type="datetime-local" class="form-input" required>
                     </div>
-
+                    
                     <div class="form-group">
-                        <label class="form-label">Descrição da Situação</label>
-                        <textarea class="form-textarea" placeholder="Descreva detalhadamente o que aconteceu..." required></textarea>
+                        <label class="form-label">Descricao</label>
+                        <textarea class="form-textarea" placeholder="Descreva o que aconteceu..." required></textarea>
                     </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Envolvidos</label>
-                        <input type="text" class="form-input" placeholder="Quantas pessoas estavam envolvidas?">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Precisa de Ajuda Imediata?</label>
-                        <select class="form-select" required>
-                            <option value="">Selecione uma opção</option>
-                            <option value="sim">Sim, preciso de ajuda urgente</option>
-                            <option value="não">Não, apenas quero registrar</option>
-                        </select>
-                    </div>
-
+                    
                     <div class="form-buttons">
-                        <button type="submit" class="form-btn form-btn-primary">
-                            <i class="fas fa-paper-plane"></i> Enviar Relatório
-                        </button>
                         <button type="button" class="form-btn form-btn-secondary" onclick="formComponent.closeForm()">
                             <i class="fas fa-times"></i> Cancelar
+                        </button>
+                        <button type="submit" class="form-btn form-btn-primary">
+                            <i class="fas fa-paper-plane"></i> Enviar
                         </button>
                     </div>
                 </form>
@@ -229,95 +203,63 @@ class FormComponent {
         `;
 
         document.body.appendChild(overlay);
-
-        // Handler do formulário
-        const form = document.getElementById('insecurityForm');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.handleFormSubmit('insecurity');
-        });
-
-        // Fecha ao clicar fora
-        overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) {
-                this.closeForm();
-            }
-        });
+        this.setupFormHandlers(overlay, 'insecurity');
     }
 
-    // Mostra formulário de denúncia
-    showDenunciationForm() {
+    // Mostra formulario de denuncia
+    showReportForm() {
         const overlay = document.createElement('div');
         overlay.className = 'form-overlay';
         
         overlay.innerHTML = `
             <div class="form-modal">
-                <button class="form-close" onclick="formComponent.closeForm()">
-                    <i class="fas fa-times"></i>
-                </button>
-                
                 <div class="form-header">
                     <div class="form-icon">
-                        <i class="fas fa-bullhorn"></i>
+                        <i class="fas fa-gavel"></i>
                     </div>
-                    <div class="form-title">📢 Fazer Denúncia</div>
-                    <div class="form-subtitle">Denuncie uma ocorrência de violência ou crime</div>
+                    <div class="form-title">Fazer Denuncia</div>
+                    <div class="form-subtitle">Reporte um crime ou incidente</div>
                 </div>
-
-                <form id="denunciationForm">
+                
+                <form id="reportForm">
                     <div class="form-group">
-                        <label class="form-label">Tipo de Violência</label>
+                        <label class="form-label">Tipo de Denuncia</label>
                         <select class="form-select" required>
-                            <option value="">Selecione uma opção</option>
-                            <option value="violência-doméstica">Violência Doméstica</option>
-                            <option value="assédio-sexual">Assédio Sexual</option>
-                            <option value="agressão-física">Agressão Física</option>
-                            <option value="violência-psicológica">Violência Psicológica</option>
-                            <option value="discriminação">Discriminação</option>
+                            <option value="">Selecione uma opcao</option>
+                            <option value="furto">Furto</option>
+                            <option value="roubo">Roubo</option>
+                            <option value="agressao">Agressao</option>
+                            <option value="ameaca">Ameaca</option>
                             <option value="outro">Outro</option>
                         </select>
                     </div>
-
+                    
                     <div class="form-group">
-                        <label class="form-label">Local da Ocorrência</label>
-                        <input type="text" class="form-input" placeholder="Endereço completo..." required>
+                        <label class="form-label">Local do Incidente</label>
+                        <input type="text" class="form-input" placeholder="Endereco completo" required>
                     </div>
-
+                    
                     <div class="form-group">
                         <label class="form-label">Data e Hora</label>
                         <input type="datetime-local" class="form-input" required>
                     </div>
-
+                    
                     <div class="form-group">
-                        <label class="form-label">Descrição Detalhada</label>
-                        <textarea class="form-textarea" placeholder="Descreva o que aconteceu, quem estava envolvido..." required></textarea>
+                        <label class="form-label">Descricao Detalhada</label>
+                        <textarea class="form-textarea" placeholder="Descreva o incidente em detalhes..." required></textarea>
                     </div>
-
+                    
                     <div class="form-group">
-                        <label class="form-label">Testemunhas</label>
-                        <input type="text" class="form-input" placeholder="Havia testemunhas? Quantas?">
+                        <label class="form-label">Testemunhas (se houver)</label>
+                        <input type="text" class="form-input" placeholder="Nome ou descricao das testemunhas">
                     </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Evidências</label>
-                        <textarea class="form-textarea" placeholder="Fotos, vídeos, mensagens, etc."></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Anonimato</label>
-                        <select class="form-select" required>
-                            <option value="">Selecione uma opção</option>
-                            <option value="sim">Quero denunciar anonimamente</option>
-                            <option value="não">Posso fornecer meus dados</option>
-                        </select>
-                    </div>
-
+                    
                     <div class="form-buttons">
-                        <button type="submit" class="form-btn form-btn-primary">
-                            <i class="fas fa-paper-plane"></i> Enviar Denúncia
-                        </button>
                         <button type="button" class="form-btn form-btn-secondary" onclick="formComponent.closeForm()">
                             <i class="fas fa-times"></i> Cancelar
+                        </button>
+                        <button type="submit" class="form-btn form-btn-primary">
+                            <i class="fas fa-paper-plane"></i> Enviar Denuncia
                         </button>
                     </div>
                 </form>
@@ -325,12 +267,16 @@ class FormComponent {
         `;
 
         document.body.appendChild(overlay);
+        this.setupFormHandlers(overlay, 'report');
+    }
 
-        // Handler do formulário
-        const form = document.getElementById('denunciationForm');
+    // Configura os handlers do formulario
+    setupFormHandlers(overlay, formType) {
+        const form = overlay.querySelector('form');
+        
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            this.handleFormSubmit('denunciation');
+            this.handleFormSubmit(formType, form);
         });
 
         // Fecha ao clicar fora
@@ -339,33 +285,57 @@ class FormComponent {
                 this.closeForm();
             }
         });
+
+        // Fecha com ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.closeForm();
+            }
+        });
     }
 
-    // Handler para envio do formulário
-    handleFormSubmit(type) {
+    // Handler para envio do formulario
+    handleFormSubmit(formType, form) {
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        
+        console.log(`${formType} form submitted:`, data);
+        
         // Simula envio
-        const overlay = document.querySelector('.form-overlay');
+        this.showSuccessMessage(formType);
+    }
+
+    // Mostra mensagem de sucesso
+    showSuccessMessage(formType) {
+        const overlay = document.createElement('div');
+        overlay.className = 'form-overlay';
+        
+        const message = formType === 'insecurity' 
+            ? 'Relatorio de inseguranca enviado com sucesso!'
+            : 'Denuncia enviada com sucesso!';
+        
         overlay.innerHTML = `
             <div class="form-modal">
                 <div class="form-header">
                     <div class="form-icon">
                         <i class="fas fa-check-circle" style="color: #28a745;"></i>
                     </div>
-                    <div class="form-title">✅ Enviado com Sucesso!</div>
-                    <div class="form-subtitle">
-                        ${type === 'insecurity' ? 'Seu relatório foi registrado e será analisado.' : 'Sua denúncia foi enviada para as autoridades competentes.'}
-                    </div>
+                    <div class="form-title">Enviado!</div>
+                    <div class="form-subtitle">${message}</div>
                 </div>
+                
                 <div class="form-buttons">
                     <button class="form-btn form-btn-primary" onclick="formComponent.closeForm()">
-                        <i class="fas fa-check"></i> Entendi
+                        <i class="fas fa-check"></i> OK
                     </button>
                 </div>
             </div>
         `;
+
+        document.body.appendChild(overlay);
     }
 
-    // Fecha o formulário
+    // Fecha o formulario
     closeForm() {
         const overlay = document.querySelector('.form-overlay');
         if (overlay) {
@@ -374,5 +344,5 @@ class FormComponent {
     }
 }
 
-// Instância global do componente
+// Instancia global do componente
 window.formComponent = new FormComponent(); 

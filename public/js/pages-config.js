@@ -1,4 +1,4 @@
-// Configuração das páginas do aplicativo
+// Configuracao das paginas do aplicativo
 const PAGES_CONFIG = {
     'home': {
         title: '',

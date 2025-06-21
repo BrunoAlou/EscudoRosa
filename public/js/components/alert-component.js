@@ -121,9 +121,9 @@ class AlertComponent {
                 <div class="alert-icon">
                     <i class="fas fa-exclamation-triangle"></i>
                 </div>
-                <div class="alert-title">🚨 EMERGÊNCIA</div>
+                <div class="alert-title">EMERGENCIA</div>
                 <div class="alert-message">
-                    Você está em uma situação de perigo?<br>
+                    Voce esta em uma situacao de perigo?<br>
                     <strong>Precisa de ajuda imediata?</strong>
                 </div>
                 <div class="alert-buttons">
@@ -131,7 +131,7 @@ class AlertComponent {
                         <i class="fas fa-check"></i> SIM, PRECISO DE AJUDA
                     </button>
                     <button class="alert-btn alert-btn-no" onclick="alertComponent.handleNo()">
-                        <i class="fas fa-times"></i> NÃO, ESTOU BEM
+                        <i class="fas fa-times"></i> NAO, ESTOU BEM
                     </button>
                 </div>
             </div>
@@ -158,23 +158,23 @@ class AlertComponent {
     handleYes() {
         this.closeAlert();
         
-        // Mostra alerta de confirmação
+        // Mostra alerta de confirmacao
         setTimeout(() => {
             this.showConfirmationAlert();
         }, 300);
     }
 
-    // Handler para resposta NÃO
+    // Handler para resposta NAO
     handleNo() {
         this.closeAlert();
         
-        // Mostra mensagem de alívio
+        // Mostra mensagem de alivio
         setTimeout(() => {
             this.showReliefMessage();
         }, 300);
     }
 
-    // Alerta de confirmação para ajuda
+    // Alerta de confirmacao para ajuda
     showConfirmationAlert() {
         const overlay = document.createElement('div');
         overlay.className = 'alert-overlay';
@@ -184,10 +184,10 @@ class AlertComponent {
                 <div class="alert-icon">
                     <i class="fas fa-phone"></i>
                 </div>
-                <div class="alert-title">📞 ACIONANDO AJUDA</div>
+                <div class="alert-title">ACIONANDO AJUDA</div>
                 <div class="alert-message">
-                    <strong>Ligando para emergência...</strong><br>
-                    Mantenha a calma, ajuda está a caminho.
+                    <strong>Ligando para emergencia...</strong><br>
+                    Mantenha a calma, ajuda esta a caminho.
                 </div>
                 <div class="alert-buttons">
                     <button class="alert-btn alert-btn-yes" onclick="alertComponent.closeAlert()">
@@ -200,7 +200,7 @@ class AlertComponent {
         document.body.appendChild(overlay);
     }
 
-    // Mensagem de alívio
+    // Mensagem de alivio
     showReliefMessage() {
         const overlay = document.createElement('div');
         overlay.className = 'alert-overlay';
@@ -208,15 +208,15 @@ class AlertComponent {
         overlay.innerHTML = `
             <div class="alert-modal">
                 <div class="alert-icon">
-                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-heart" style="color: #2ed573;"></i>
                 </div>
-                <div class="alert-title">💙 Ficamos Aliviados</div>
+                <div class="alert-title">Que bom!</div>
                 <div class="alert-message">
-                    Que bom que você está bem!<br>
-                    Lembre-se: estamos aqui para ajudar sempre que precisar.
+                    Ficamos felizes que voce esteja bem!<br>
+                    Continue se cuidando e mantenha-se seguro.
                 </div>
                 <div class="alert-buttons">
-                    <button class="alert-btn alert-btn-no" onclick="alertComponent.closeAlert()">
+                    <button class="alert-btn alert-btn-yes" onclick="alertComponent.closeAlert()">
                         <i class="fas fa-check"></i> OBRIGADO
                     </button>
                 </div>
@@ -235,5 +235,5 @@ class AlertComponent {
     }
 }
 
-// Instância global do componente
+// Instancia global do componente
 window.alertComponent = new AlertComponent(); 
