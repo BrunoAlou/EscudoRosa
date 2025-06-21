@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "dev": "concurrently \"npm run start\" \"npm run live-server\"",
+    "live-server": "live-server --port=5500 --entry-file=views/index.html --open=/views/index.html --mount=/public:./public --mount=/views:./views"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +18,10 @@
     "express": "^5.1.0"
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
+    "connect-livereload": "^0.6.1",
+    "live-server": "^1.2.2",
+    "livereload": "^0.9.3",
     "nodemon": "^3.1.10"
   }
 }
