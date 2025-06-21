@@ -6,9 +6,6 @@ exports.getIndex = (req, res) => {
         res.render('index');
     } catch (error) {
         console.error('❌ Erro ao renderizar página inicial:', error);
-        res.status(500).json({ 
-            error: 'Erro ao carregar página',
-            message: process.env.NODE_ENV === 'production' ? 'Erro interno' : error.message
-        });
+        res.status(500).send('Erro ao carregar página');
     }
 };

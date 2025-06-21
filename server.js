@@ -16,9 +16,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-// Rota principal
-app.get('/', homeController.getIndex);
-
 // Rota de health check para o Railway
 app.get('/health', (req, res) => {
     res.status(200).json({ 
@@ -33,6 +30,9 @@ app.get('/favicon.ico', (req, res) => {
     res.status(204).end();
 });
 
+// Rota principal
+app.get('/', homeController.getIndex);
+
 // Middleware de tratamento de erros
 app.use((err, req, res, next) => {
     console.error('Erro no servidor:', err);
@@ -42,8 +42,8 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Rota 404 para páginas não encontradas
-app.use('*', (req, res) => {
+// Rota 404 para páginas não encontradas (corrigida)
+app.use((req, res) => {
     res.status(404).json({ 
         error: 'Página não encontrada',
         path: req.originalUrl
