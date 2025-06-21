@@ -1,0 +1,58 @@
+<!-- Template para o alerta de perigo -->
+<div class="alert-overlay">
+    <div class="alert-modal">
+        <div class="alert-icon">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <div class="alert-title">🚨 EMERGÊNCIA</div>
+        <div class="alert-message">
+            Tem certeza que deseja enviar um alerta de emergência? Sua localização será compartilhada com seus contatos de emergência.<br>
+        </div>
+        <div class="alert-buttons">
+            <button class="alert-btn alert-btn-yes" onclick="alertComponent.handleYes()">
+                <i class="fas fa-check"></i> SIM, PRECISO DE AJUDA
+            </button>
+            <button class="alert-btn alert-btn-no" onclick="alertComponent.handleNo()">
+                <i class="fas fa-times"></i> NÃO, ESTOU BEM
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Template para o alerta de confirmação -->
+<div class="alert-overlay" id="confirmation-alert" style="display: none;">
+    <div class="alert-modal">
+        <div class="alert-icon">
+            <i class="fas fa-phone"></i>
+        </div>
+        <div class="alert-title">📞 ACIONANDO AJUDA</div>
+        <div class="alert-message">
+            <strong>Ligando para emergência...</strong><br>
+            Mantenha a calma, ajuda está a caminho.
+        </div>
+        <div class="alert-buttons">
+            <button class="alert-btn alert-btn-yes" onclick="alertComponent.closeAlert()">
+                <i class="fas fa-check"></i> ENTENDI
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Template para a mensagem de alívio -->
+<div class="alert-overlay" id="relief-alert" style="display: none;">
+    <div class="alert-modal">
+        <div class="alert-icon">
+            <i class="fas fa-heart"></i>
+        </div>
+        <div class="alert-title">💙 Ficamos Aliviados</div>
+        <div class="alert-message">
+            Que bom que você está bem!<br>
+            Lembre-se: estamos aqui para ajudar sempre que precisar.
+        </div>
+        <div class="alert-buttons">
+            <button class="alert-btn alert-btn-no" onclick="alertComponent.closeAlert()">
+                <i class="fas fa-check"></i> OBRIGADO
+            </button>
+        </div>
+    </div>
+</div> 

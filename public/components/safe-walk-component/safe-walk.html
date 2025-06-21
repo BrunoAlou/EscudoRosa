@@ -1,0 +1,139 @@
+<!-- Template para o formulário de caminhada segura -->
+<div class="safe-walk-overlay" id="safe-walk-form-template" style="display: none;">
+    <div class="safe-walk-modal">
+        <button class="safe-walk-close" onclick="safeWalkComponent.closeSafeWalk()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="safe-walk-header">
+            <div class="safe-walk-icon">
+                <i class="fas fa-walking"></i>
+            </div>
+            <div class="safe-walk-title">🚶‍♀️ Caminhada Segura</div>
+            <div class="safe-walk-subtitle">Planeje sua rota e receba dicas de segurança</div>
+        </div>
+        <form id="safeWalkForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Ponto de Partida</label>
+                    <input type="text" class="form-input" placeholder="De onde você vai sair?" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Destino</label>
+                    <input type="text" class="form-input" placeholder="Para onde você vai?" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Horário de Saída</label>
+                    <input type="time" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Duração Estimada</label>
+                    <select class="form-select" required>
+                        <option value="">Selecione</option>
+                        <option value="5-15min">5-15 minutos</option>
+                        <option value="15-30min">15-30 minutos</option>
+                        <option value="30-60min">30-60 minutos</option>
+                        <option value="60min+">Mais de 1 hora</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Tipo de Trajeto</label>
+                <div class="safe-walk-options">
+                    <div class="option-card" onclick="safeWalkComponent.selectOption(this, 'a-pé')">
+                        <i class="fas fa-walking"></i>
+                        <div>A Pé</div>
+                    </div>
+                    <div class="option-card" onclick="safeWalkComponent.selectOption(this, 'transporte')">
+                        <i class="fas fa-bus"></i>
+                        <div>Transporte</div>
+                    </div>
+                    <div class="option-card" onclick="safeWalkComponent.selectOption(this, 'bicicleta')">
+                        <i class="fas fa-bicycle"></i>
+                        <div>Bicicleta</div>
+                    </div>
+                    <div class="option-card" onclick="safeWalkComponent.selectOption(this, 'carona')">
+                        <i class="fas fa-car"></i>
+                        <div>Carona</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Preferências de Segurança</label>
+                <div class="safe-walk-options">
+                    <div class="option-card" onclick="safeWalkComponent.selectOption(this, 'rotas-iluminadas')">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>Rotas Iluminadas</div>
+                    </div>
+                    <div class="option-card" onclick="safeWalkComponent.selectOption(this, 'áreas-movimentadas')">
+                        <i class="fas fa-users"></i>
+                        <div>Áreas Movimentadas</div>
+                    </div>
+                    <div class="option-card" onclick="safeWalkComponent.selectOption(this, 'presença-policial')">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>Presença Policial</div>
+                    </div>
+                    <div class="option-card" onclick="safeWalkComponent.selectOption(this, 'câmeras')">
+                        <i class="fas fa-video"></i>
+                        <div>Câmeras</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Observações Adicionais</label>
+                <textarea class="form-textarea" placeholder="Alguma informação adicional sobre sua rota?"></textarea>
+            </div>
+            <div class="safety-tips">
+                <h4>💡 Dicas de Segurança</h4>
+                <ul>
+                    <li>Mantenha seu telefone carregado e acessível</li>
+                    <li>Evite usar fones de ouvido em áreas isoladas</li>
+                    <li>Compartilhe sua localização com alguém de confiança</li>
+                    <li>Fique atento ao seu entorno</li>
+                </ul>
+            </div>
+            <div class="safe-walk-buttons">
+                <button type="submit" class="safe-walk-btn safe-walk-btn-primary">
+                    <i class="fas fa-route"></i> Calcular Rota Segura
+                </button>
+                <button type="button" class="safe-walk-btn safe-walk-btn-secondary" onclick="safeWalkComponent.closeSafeWalk()">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Template para sucesso -->
+<div class="safe-walk-overlay" id="safe-walk-success-template" style="display: none;">
+    <div class="safe-walk-modal">
+        <div class="safe-walk-header">
+            <div class="safe-walk-icon">
+                <i class="fas fa-check-circle" style="color: #2ed573;"></i>
+            </div>
+            <div class="safe-walk-title">✅ Rota Segura Calculada!</div>
+            <div class="safe-walk-subtitle">Sua rota foi planejada com base nas melhores práticas de segurança</div>
+        </div>
+        <div style="text-align: center; margin: 2rem 0;">
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 15px; margin-bottom: 1rem;">
+                <h4 style="color: #2ed573; margin-bottom: 1rem;">🗺️ Rota Recomendada</h4>
+                <p><strong>Distância:</strong> 1.2 km</p>
+                <p><strong>Tempo estimado:</strong> 15 minutos</p>
+                <p><strong>Nível de segurança:</strong> Alto</p>
+            </div>
+            <div style="background: #e8f5e8; padding: 1.5rem; border-radius: 15px;">
+                <h4 style="color: #2ed573; margin-bottom: 1rem;">🛡️ Recursos de Segurança</h4>
+                <p>✅ Rotas bem iluminadas</p>
+                <p>✅ Áreas com movimento</p>
+                <p>✅ Postos policiais próximos</p>
+                <p>✅ Câmeras de segurança</p>
+            </div>
+        </div>
+        <div class="safe-walk-buttons">
+            <button class="safe-walk-btn safe-walk-btn-primary" onclick="safeWalkComponent.closeSafeWalk()">
+                <i class="fas fa-check"></i> Entendi
+            </button>
+        </div>
+    </div>
+</div> 

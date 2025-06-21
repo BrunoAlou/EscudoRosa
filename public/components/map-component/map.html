@@ -1,0 +1,100 @@
+<!-- Template para o mapa de áreas de risco -->
+<div class="map-overlay" id="risk-map-template" style="display: none;">
+    <div class="map-modal">
+        <button class="map-close" onclick="mapComponent.closeMap()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="map-header">
+            <div class="map-icon">
+                <i class="fas fa-map-marked-alt"></i>
+            </div>
+            <div class="map-title">🗺️ Mapa de Áreas de Risco</div>
+            <div class="map-subtitle">Visualize áreas com histórico de ocorrências e pontos de segurança</div>
+        </div>
+        <div class="map-controls">
+            <button class="map-btn map-btn-primary" onclick="mapComponent.getCurrentLocation()">
+                <i class="fas fa-location-arrow"></i> Minha Localização
+            </button>
+            <button class="map-btn map-btn-secondary" onclick="mapComponent.showRiskAreas()">
+                <i class="fas fa-exclamation-triangle"></i> Áreas de Risco
+            </button>
+        </div>
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d59025.56411249518!2d-47.909561!3d-15.800733000000001!3m2!1i1024!2i768!4f13.1!5e1!3m2!1spt-BR!2sbr!4v1750484337915!5m2!1spt-BR!2sbr" 
+                width="100%" 
+                height="300" 
+                style="border:0; border-radius: 10px;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+        <div class="risk-legend">
+            <div class="legend-item">
+                <div class="legend-dot legend-you"></div>
+                <span class="legend-text">Você</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot legend-high"></div>
+                <span class="legend-text">Alto Risco</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot legend-medium"></div>
+                <span class="legend-text">Médio Risco</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Template para o mapa de áreas de risco + opções -->
+<div class="map-overlay" id="risk-map-options-template" style="display: none;">
+    <div class="map-modal">
+        <button class="map-close" onclick="mapComponent.closeMap()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="map-header">
+            <div class="map-icon">
+                <i class="fas fa-map-marked-alt"></i>
+            </div>
+            <div class="map-title">🗺️ Mapa de Áreas de Risco + Opções</div>
+            <div class="map-subtitle">Visualize riscos e escolha ações de segurança</div>
+        </div>
+        <div class="map-controls">
+            <button class="map-btn map-btn-primary" onclick="mapComponent.getCurrentLocation()">
+                <i class="fas fa-location-arrow"></i> Minha Localização
+            </button>
+            <button class="map-btn map-btn-secondary" onclick="mapComponent.showRouteOptions()">
+                <i class="fas fa-route"></i> Rotas Seguras
+            </button>
+            <button class="map-btn map-btn-secondary" onclick="mapComponent.showEmergencyOptions()">
+                <i class="fas fa-exclamation-circle"></i> Opções de Emergência
+            </button>
+        </div>
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d59025.56411249518!2d-47.909561!3d-15.800733000000001!3m2!1i1024!2i768!4f13.1!5e1!3m2!1spt-BR!2sbr!4v1750484337915!5m2!1spt-BR!2sbr" 
+                width="100%" 
+                height="300" 
+                style="border:0; border-radius: 10px;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+        <div class="risk-legend">
+            <div class="legend-item">
+                <div class="legend-dot legend-you"></div>
+                <span class="legend-text">Você</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot legend-high"></div>
+                <span class="legend-text">Alto Risco</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot legend-medium"></div>
+                <span class="legend-text">Médio Risco</span>
+            </div>
+        </div>
+    </div>
+</div> 
