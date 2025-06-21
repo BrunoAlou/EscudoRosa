@@ -1,4 +1,4 @@
-# Meu App MVC
+# Escudo Rosa App
 
 Aplicativo MVC simples com Express.js e sistema de carregamento dinâmico de páginas.
 
@@ -47,7 +47,7 @@ npm start
 ## 📁 Estrutura do Projeto
 
 ```
-meu-app-mvc/
+escudo-rosa-app/
 ├── controllers/          # Controladores MVC
 ├── models/              # Modelos de dados
 ├── views/               # Templates HTML

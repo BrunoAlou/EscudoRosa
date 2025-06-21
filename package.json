@@ -1,5 +1,5 @@
 {
-  "name": "meu-app-mvc",
+  "name": "escudo-rosa-app",
   "version": "1.0.0",
   "description": "Aplicação MVC para segurança feminina",
   "main": "server.js",
@@ -12,9 +12,9 @@
     "live-server": "live-server --port=5500 --entry-file=views/index.html --open=/views/index.html --mount=/public:./public --mount=/views:./views",
     "dev-full": "concurrently \"npm run dev\" \"npm run live-server\"",
     "pm2:start": "pm2 start ecosystem.config.js",
-    "pm2:stop": "pm2 stop meu-app-mvc",
-    "pm2:restart": "pm2 restart meu-app-mvc",
-    "pm2:logs": "pm2 logs meu-app-mvc"
+    "pm2:stop": "pm2 stop escudo-rosa-app",
+    "pm2:restart": "pm2 restart escudo-rosa-app",
+    "pm2:logs": "pm2 logs escudo-rosa-app"
   },
   "keywords": ["security", "women", "safety", "mvc"],
   "author": "",

@@ -121,7 +121,7 @@ npm run build
 
 ## Estrutura Final
 ```
-meu-app-mvc/
+escudo-rosa-app/
 ├── railway.json          # Configuração Railway
 ├── Procfile             # Comando de execução
 ├── .npmrc               # Configuração npm (corrigido)

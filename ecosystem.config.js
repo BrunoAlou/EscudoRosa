@@ -1,6 +1,6 @@
 module.exports = {
   apps: [{
-    name: 'meu-app-mvc',
+    name: 'escudo-rosa-app',
     script: 'server.js',
     instances: 1,
     autorestart: true,
