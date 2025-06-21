@@ -16,4 +16,7 @@ const PAGES_CONFIG = {
         title: 'Ajustes',
         file: 'ajustes'
     }
-}; 
+};
+
+// Expor globalmente para debug
+window.PAGES_CONFIG = PAGES_CONFIG; 

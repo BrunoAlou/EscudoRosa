@@ -43,11 +43,26 @@
         console.log('🔍 Verificação concluída!');
     }
     
+    // Função para aguardar carregamento dos componentes
+    function waitForComponents() {
+        const allComponentsLoaded = expectedComponents.every(componentName => window[componentName]);
+        
+        if (allComponentsLoaded && window.pagesLoader && window.PAGES_CONFIG) {
+            console.log('🎉 Todos os componentes carregados com sucesso!');
+            checkComponents();
+        } else {
+            // Aguarda mais um pouco
+            setTimeout(waitForComponents, 500);
+        }
+    }
+    
     // Aguarda o DOM estar pronto
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
-            // Verifica imediatamente após o DOM estar pronto
-            checkComponents();
+            // Aguarda um pouco para os componentes com defer carregarem
+            setTimeout(() => {
+                waitForComponents();
+            }, 100);
             
             // Verifica novamente após 1 segundo
             setTimeout(() => {
@@ -62,8 +77,10 @@
             }, 3000);
         });
     } else {
-        // DOM já está pronto, verifica imediatamente
-        checkComponents();
+        // DOM já está pronto, aguarda um pouco para os componentes carregarem
+        setTimeout(() => {
+            waitForComponents();
+        }, 100);
         
         // Verifica novamente após 1 segundo
         setTimeout(() => {
