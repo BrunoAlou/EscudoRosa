@@ -1,3 +1,5 @@
+// Arquivo app.js
+
 // Controle do dropdown do header
 document.addEventListener('DOMContentLoaded', function() {
     const dropdownToggle = document.querySelector('.dropdown-toggle');
@@ -106,4 +108,4 @@ document.addEventListener('DOMContentLoaded', function() {
         window.pagesLoader.clearCache();
         console.log('Cache limpo! Recarregue a página para ver as mudanças.');
     };
-}); 
+});
