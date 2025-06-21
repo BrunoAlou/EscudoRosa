@@ -2,11 +2,12 @@
   "name": "meu-app-mvc",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
-    "dev": "concurrently \"npm run start\" \"npm run live-server\"",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "dev-full": "concurrently \"npm run dev\" \"npm run live-server\"",
     "live-server": "live-server --port=5500 --entry-file=views/index.html --open=/views/index.html --mount=/public:./public --mount=/views:./views"
   },
   "keywords": [],

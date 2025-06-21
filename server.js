@@ -3,7 +3,6 @@ const path = require('path');
 const homeController = require('./controllers/homeController');
 
 const app = express();
-const port = 3000;
 
 // Define o diretório de arquivos estáticos (CSS, JS, imagens)
 app.use(express.static(path.join(__dirname, 'public')));
@@ -32,8 +31,16 @@ if (process.env.NODE_ENV !== 'production') {
     }
 }
 
+// Porta para Railway (usa a variável de ambiente PORT)
+const port = process.env.PORT || 3000;
+
 app.listen(port, () => {
-    console.log(`✅ Servidor rodando em http://localhost:${port}`);
-    console.log('📝 Modifique os arquivos e veja as mudanças automaticamente!');
-    console.log('🔄 O nodemon reinicia o servidor automaticamente quando você salva arquivos');
+    console.log(`✅ Servidor rodando na porta ${port}`);
+    if (process.env.NODE_ENV !== 'production') {
+        console.log(`🌐 Acesse: http://localhost:${port}`);
+        console.log('📝 Modifique os arquivos e veja as mudanças automaticamente!');
+        console.log('🔄 O nodemon reinicia o servidor automaticamente quando você salva arquivos');
+    } else {
+        console.log('🚀 Aplicação em produção!');
+    }
 });
