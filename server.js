@@ -8,17 +8,24 @@ const port = process.env.PORT || 3000;
 
 // Configuração de MIME types para arquivos estáticos
 app.use(express.static(path.join(__dirname, 'public'), {
-    setHeaders: (res, path) => {
-        if (path.endsWith('.css')) {
-            res.setHeader('Content-Type', 'text/css');
-        } else if (path.endsWith('.js')) {
-            res.setHeader('Content-Type', 'application/javascript');
-        } else if (path.endsWith('.png')) {
-            res.setHeader('Content-Type', 'image/png');
-        } else if (path.endsWith('.jpg') || path.endsWith('.jpeg')) {
-            res.setHeader('Content-Type', 'image/jpeg');
-        } else if (path.endsWith('.ico')) {
-            res.setHeader('Content-Type', 'image/x-icon');
+    setHeaders: (res, filePath) => {
+        const ext = path.extname(filePath).toLowerCase();
+        const mimeTypes = {
+            '.css': 'text/css',
+            '.js': 'application/javascript',
+            '.png': 'image/png',
+            '.jpg': 'image/jpeg',
+            '.jpeg': 'image/jpeg',
+            '.ico': 'image/x-icon',
+            '.svg': 'image/svg+xml',
+            '.woff': 'font/woff',
+            '.woff2': 'font/woff2',
+            '.ttf': 'font/ttf',
+            '.eot': 'application/vnd.ms-fontobject'
+        };
+        
+        if (mimeTypes[ext]) {
+            res.setHeader('Content-Type', mimeTypes[ext]);
         }
     }
 }));
@@ -27,6 +34,14 @@ app.use(express.static(path.join(__dirname, 'public'), {
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
+
+// Middleware para logging em produção
+if (process.env.NODE_ENV === 'production') {
+    app.use((req, res, next) => {
+        console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+        next();
+    });
+}
 
 // Rota principal
 app.get('/', homeController.getIndex);
@@ -53,24 +68,41 @@ app.get('/favicon.ico', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'images', 'logo-icon.png'));
 });
 
-// Configuração simples do Livereload (apenas em desenvolvimento)
+// Rota de health check para Railway
+app.get('/health', (req, res) => {
+    res.status(200).json({ 
+        status: 'OK', 
+        timestamp: new Date().toISOString(),
+        environment: process.env.NODE_ENV || 'development'
+    });
+});
+
+// Configuração do Livereload apenas em desenvolvimento
 if (process.env.NODE_ENV !== 'production') {
     try {
         const connectLivereload = require('connect-livereload');
-        
-        // Middleware para injetar o script do livereload
         app.use(connectLivereload());
-        
-        console.log('🔄 Live reload configurado!');
-        console.log('💡 Dica: Use uma extensão de live reload no navegador para melhor experiência');
-        
+        console.log('🔄 Live reload configurado para desenvolvimento!');
     } catch (error) {
         console.log('⚠️  Live reload não disponível:', error.message);
     }
 }
 
+// Middleware de tratamento de erros
+app.use((err, req, res, next) => {
+    console.error('Erro:', err.stack);
+    res.status(500).send('Algo deu errado!');
+});
+
+// Middleware para rotas não encontradas
+app.use((req, res) => {
+    res.status(404).send('Página não encontrada');
+});
+
 app.listen(port, () => {
-    console.log(`✅ Servidor rodando em http://localhost:${port}`);
-    console.log('📝 Modifique os arquivos e veja as mudanças automaticamente!');
-    console.log('🔄 O nodemon reinicia o servidor automaticamente quando você salva arquivos');
+    console.log(`✅ Servidor rodando na porta ${port}`);
+    console.log(`🌍 Ambiente: ${process.env.NODE_ENV || 'development'}`);
+    if (process.env.NODE_ENV !== 'production') {
+        console.log('📝 Modifique os arquivos e veja as mudanças automaticamente!');
+    }
 });

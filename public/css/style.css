@@ -30,6 +30,7 @@ body {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
+    flex-wrap: nowrap; /* Garante que não quebre em linha */
 }
 
 .logo {
@@ -37,6 +38,10 @@ body {
     font-weight: bold;
     color: #333;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap; /* Evita quebra de linha */
 }
 
 .logo:hover {
@@ -44,10 +49,15 @@ body {
     transition: color 0.3s ease;
 }
 
+.logo-icon {
+    flex-shrink: 0; /* Evita que a logo seja comprimida */
+}
+
 /* Dropdown */
 .dropdown {
     position: relative;
     display: inline-block;
+    flex-shrink: 0; /* Evita que o dropdown seja comprimido */
 }
 
 .dropdown-toggle {
@@ -63,6 +73,7 @@ body {
     align-items: center;
     gap: 0.5rem;
     transition: all 0.3s ease;
+    white-space: nowrap; /* Evita quebra de linha */
 }
 
 .dropdown-toggle:hover {
@@ -136,6 +147,9 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     min-height: 60vh;
     animation: fadeIn 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
 
 .page-title {
@@ -148,6 +162,9 @@ body {
 .page-content {
     color: #666;
     line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
 
 /* Footer */
@@ -155,7 +172,6 @@ body {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.1);
-    padding: 1rem 0;
     position: sticky;
     bottom: 0;
     z-index: 1000;
@@ -172,6 +188,7 @@ body {
     justify-content: space-around;
     align-items: center;
     list-style: none;
+    margin: 0;
 }
 
 .footer-menu-item {
@@ -214,15 +231,25 @@ body {
     font-weight: 500;
 }
 
-/* Responsividade */
+/* Responsividade - Mantém header sempre em linha */
 @media (max-width: 768px) {
     .header {
-        padding: 1rem;
+        padding: 0.75rem 1rem; /* Reduz padding mas mantém em linha */
     }
     
     .header-content {
-        flex-direction: column;
-        gap: 1rem;
+        flex-direction: row; /* Força sempre em linha */
+        gap: 0.5rem; /* Reduz gap mas mantém separação */
+        justify-content: space-between; /* Mantém distribuição */
+    }
+    
+    .logo {
+        font-size: 1.2rem; /* Reduz tamanho da fonte */
+    }
+    
+    .dropdown-toggle {
+        padding: 0.5rem 1rem; /* Reduz padding do botão */
+        font-size: 0.8rem; /* Reduz tamanho da fonte */
     }
     
     .main-content {
@@ -242,6 +269,27 @@ body {
     }
 }
 
+/* Responsividade para telas muito pequenas */
+@media (max-width: 480px) {
+    .header {
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .logo {
+        font-size: 1rem;
+    }
+    
+    .logo-icon {
+        width: 60px !important; /* Reduz tamanho da logo */
+        height: 40px !important;
+    }
+    
+    .dropdown-toggle {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+    }
+}
+
 /* Animações */
 @keyframes fadeIn {
     from {
@@ -252,4 +300,306 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Estilos para botões e cards */
+.danger-button {
+    background: linear-gradient(135deg, #ff4757, #ff3742);
+    color: white;
+    border: none;
+    padding: 2rem 4rem;
+    border-radius: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 8px 25px rgba(255, 71, 87, 0.3);
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 400px;
+    min-height: 80px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.danger-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(255, 71, 87, 0.4);
+}
+
+.insecurity-button {
+    background: linear-gradient(135deg, #6c757d, #495057);
+    color: white;
+    border: none;
+    padding: 2rem 4rem;
+    border-radius: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 8px 25px rgba(108, 117, 125, 0.3);
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 400px;
+    min-height: 80px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.insecurity-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(108, 117, 125, 0.4);
+}
+
+/* Alinhamento dos ícones dos botões */
+.button-icon {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.button-text {
+    flex: 1;
+    text-align: center;
+}
+
+.services-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.service-card {
+    background: white;
+    padding: 2rem 4rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.service-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.service-icon {
+    font-size: 2rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.service-title {
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.service-description {
+    display: none; /* Oculta a descrição para manter o mesmo tamanho dos botões */
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+
+.services-section {
+    background: #f8f9fa;
+    padding: 3rem 2rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
+
+.map-section {
+    background: white;
+    padding: 2rem;
+    margin-top: 0;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
+
+.map-placeholder {
+    background: #e9ecef;
+    height: 300px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #adb5bd;
+    position: relative;
+    z-index: 1;
+}
+
+.map-content {
+    text-align: center;
+    color: #6c757d;
+}
+
+.map-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.map-text {
+    font-size: 1.2rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+.map-subtext {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Responsividade para botões e cards */
+@media (max-width: 768px) {
+    .danger-button,
+    .insecurity-button {
+        padding: 1.5rem 3rem;
+        font-size: 1.2rem;
+        min-height: 70px;
+    }
+    
+    .button-icon {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+    
+    .service-card {
+        padding: 1.5rem 3rem;
+        min-height: 70px;
+    }
+    
+    .service-icon {
+        font-size: 1.8rem;
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+    
+    .service-title {
+        font-size: 1.2rem;
+    }
+    
+    .services-section {
+        padding: 2rem 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .danger-button,
+    .insecurity-button {
+        padding: 1.2rem 2rem;
+        font-size: 1rem;
+        min-height: 60px;
+    }
+    
+    .button-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+    
+    .service-card {
+        padding: 1.2rem 2rem;
+        min-height: 60px;
+    }
+    
+    .service-icon {
+        font-size: 1.5rem;
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+    
+    .service-title {
+        font-size: 1rem;
+    }
+    
+    .services-section {
+        padding: 1.5rem 0.75rem;
+    }
+    
+    .buttons-container {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+    
+    .services-grid {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.2rem;
+    }
+}
+
+/* Garantir que o mapa não interfira com o layout */
+.map-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none; /* Inicialmente oculto */
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.map-overlay.active {
+    display: flex; /* Só aparece quando ativo */
 } 

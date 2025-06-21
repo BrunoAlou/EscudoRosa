@@ -1,11 +1,12 @@
 {
   "name": "meu-app-mvc",
   "version": "1.0.0",
-  "description": "",
+  "description": "Aplicação MVC para segurança feminina",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
+    "build": "echo 'Build completed'",
     "dev": "nodemon server.js",
     "live-server": "live-server --port=5500 --entry-file=views/index.html --open=/views/index.html --mount=/public:./public --mount=/views:./views",
     "dev-full": "concurrently \"npm run dev\" \"npm run live-server\"",
@@ -14,7 +15,7 @@
     "pm2:restart": "pm2 restart meu-app-mvc",
     "pm2:logs": "pm2 logs meu-app-mvc"
   },
-  "keywords": [],
+  "keywords": ["security", "women", "safety", "mvc"],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
@@ -30,6 +31,7 @@
     "nodemon": "^3.1.10"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
   }
 }

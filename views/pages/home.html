@@ -1,51 +1,47 @@
-<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;">
-    <button onclick="alertComponent.showDangerAlert()" style="background: linear-gradient(135deg, #ff4757, #ff3742); color: white; border: none; padding: 2rem 4rem; border-radius: 20px; font-size: 1.5rem; font-weight: bold; box-shadow: 0 8px 25px rgba(255, 71, 87, 0.3); transition: all 0.3s ease; width: 80%; max-width: 400px; cursor: pointer;">
-        <i class="fas fa-exclamation-triangle" style="margin-right: 1rem;"></i>
-        Estou em Perigo
+<div class="buttons-container">
+    <button onclick="alertComponent.showDangerAlert()" class="danger-button">
+        <i class="fas fa-exclamation-triangle button-icon"></i>
+        <span class="button-text">Estou em Perigo</span>
     </button>
     
-    <button onclick="formComponent.showInsecurityForm()" style="background: linear-gradient(135deg, #6c757d, #495057); color: white; border: none; padding: 2rem 4rem; border-radius: 20px; font-size: 1.5rem; font-weight: bold; box-shadow: 0 8px 25px rgba(108, 117, 125, 0.3); transition: all 0.3s ease; width: 80%; max-width: 400px; cursor: pointer;">
-        <i class="fas fa-shield-alt" style="margin-right: 1rem;"></i>
-        Insegurança
+    <button onclick="formComponent.showInsecurityForm()" class="insecurity-button">
+        <i class="fas fa-shield-alt button-icon"></i>
+        <span class="button-text">Insegurança</span>
     </button>
 </div>
 
-<div style="background: #f8f9fa; padding: 3rem 2rem; margin-top: 2rem;">
-    <h3 style="text-align: center; margin-bottom: 2rem; color: #333;">Serviços Disponíveis</h3>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto;">
-        <div onclick="formComponent.showDenunciationForm()" style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s ease; cursor: pointer;">
-            <i class="fas fa-bullhorn" style="font-size: 3rem; color: #007bff; margin-bottom: 1rem;"></i>
-            <h4 style="color: #333; margin-bottom: 0.5rem;">Fazer Denúncia</h4>
-            <p style="color: #666; line-height: 1.6;">Relate uma ocorrência de violência</p>
+<div class="services-section">
+    <h3 class="section-title">Serviços Disponíveis</h3>
+    <div class="services-grid">
+        <div onclick="formComponent.showDenunciationForm()" class="service-card">
+            <i class="fas fa-bullhorn service-icon" style="color: #007bff;"></i>
+            <span class="service-title">Fazer Denúncia</span>
         </div>
         
-        <div onclick="mapComponent.showRiskMap()" style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s ease; cursor: pointer;">
-            <i class="fas fa-map-marker-alt" style="font-size: 3rem; color: #2ed573; margin-bottom: 1rem;"></i>
-            <h4 style="color: #333; margin-bottom: 0.5rem;">Mapa Áreas de Risco</h4>
-            <p style="color: #666; line-height: 1.6;">Visualize áreas com histórico de ocorrências</p>
+        <div onclick="mapComponent.showRiskMap()" class="service-card">
+            <i class="fas fa-map-marker-alt service-icon" style="color: #2ed573;"></i>
+            <span class="service-title">Mapa Áreas de Risco</span>
         </div>
         
-        <div onclick="safeWalkComponent.showSafeWalkForm()" style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s ease; cursor: pointer;">
-            <i class="fas fa-walking" style="font-size: 3rem; color: #ffa502; margin-bottom: 1rem;"></i>
-            <h4 style="color: #333; margin-bottom: 0.5rem;">Caminhada Segura</h4>
-            <p style="color: #666; line-height: 1.6;">Planeje rotas seguras para seu destino</p>
+        <div onclick="safeWalkComponent.showSafeWalkForm()" class="service-card">
+            <i class="fas fa-walking service-icon" style="color: #ffa502;"></i>
+            <span class="service-title">Caminhada Segura</span>
         </div>
         
-        <div onclick="mapComponent.showRiskMapWithCards()" style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s ease; cursor: pointer;">
-            <i class="fas fa-map" style="font-size: 3rem; color: #ff4757; margin-bottom: 1rem;"></i>
-            <h4 style="color: #333; margin-bottom: 0.5rem;">Mapa + Opções</h4>
-            <p style="color: #666; line-height: 1.6;">Mapa interativo com opções de segurança</p>
+        <div onclick="mapComponent.showRiskMapWithCards()" class="service-card">
+            <i class="fas fa-map service-icon" style="color: #ff4757;"></i>
+            <span class="service-title">Mapa + Opções</span>
         </div>
     </div>
 </div>
 
-<div style="background: white; padding: 2rem; margin-top: 2rem;">
-    <h3 style="text-align: center; margin-bottom: 2rem; color: #333;">Mapa de Segurança</h3>
-    <div style="background: #e9ecef; height: 300px; border-radius: 15px; display: flex; align-items: center; justify-content: center; border: 2px dashed #adb5bd;">
-        <div style="text-align: center; color: #6c757d;">
-            <i class="fas fa-map" style="font-size: 4rem; margin-bottom: 1rem; display: block;"></i>
-            <p style="font-size: 1.2rem; margin: 0;">Mapa interativo será carregado aqui</p>
-            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Visualize pontos de segurança próximos</p>
+<div class="map-section">
+    <h3 class="section-title">Mapa de Segurança</h3>
+    <div class="map-placeholder">
+        <div class="map-content">
+            <i class="fas fa-map map-icon"></i>
+            <p class="map-text">Mapa interativo será carregado aqui</p>
+            <p class="map-subtext">Visualize pontos de segurança próximos</p>
         </div>
     </div>
 </div> 
