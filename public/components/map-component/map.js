@@ -369,17 +369,20 @@ class MapComponent {
         setTimeout(() => {
             this.initializeMap('leaflet-map');
             
-            // Atualiza título e subtítulo baseado no filtro
-            this.updateMapTitle(filterType);
-            
-            // Aplica o filtro específico
-            if (filterType === 'risk') {
-                this.showRiskAreas();
-                console.log('🔴 Mapa aberto com filtro: Áreas de Risco');
-            } else if (filterType === 'safe') {
-                this.showSafeZones();
-                console.log('🟢 Mapa aberto com filtro: Zonas Seguras');
-            }
+            // Aguarda um pouco mais para garantir que o overlay está visível
+            setTimeout(() => {
+                // Atualiza título e subtítulo baseado no filtro
+                this.updateMapTitle(filterType);
+                
+                // Aplica o filtro específico
+                if (filterType === 'risk') {
+                    this.showRiskAreas();
+                    console.log('🔴 Mapa aberto com filtro: Áreas de Risco');
+                } else if (filterType === 'safe') {
+                    this.showSafeZones();
+                    console.log('🟢 Mapa aberto com filtro: Zonas Seguras');
+                }
+            }, 200); // Aguarda 200ms para garantir que o DOM está pronto
         }, 100);
         
         this.addOverlayListeners(overlay);
@@ -389,13 +392,105 @@ class MapComponent {
     updateMapTitle(filterType) {
         const mapTitle = document.querySelector('.map-title');
         const mapSubtitle = document.querySelector('.map-subtitle');
+        const mapIcon = document.querySelector('.map-icon i');
+        
+        console.log('🔧 Atualizando título do mapa:', filterType);
+        console.log('📝 Elementos encontrados:', {
+            title: !!mapTitle,
+            subtitle: !!mapSubtitle,
+            icon: !!mapIcon
+        });
         
         if (filterType === 'risk') {
-            if (mapTitle) mapTitle.textContent = '🔴 Mapa de Áreas de Risco';
-            if (mapSubtitle) mapSubtitle.textContent = 'Visualize áreas perigosas e pontos de atenção';
+            if (mapTitle) {
+                mapTitle.textContent = '🔴 Mapa de Áreas de Risco';
+                console.log('✅ Título atualizado para Áreas de Risco');
+            }
+            if (mapSubtitle) {
+                mapSubtitle.textContent = 'Visualize áreas perigosas e pontos de atenção';
+                console.log('✅ Subtítulo atualizado para Áreas de Risco');
+            }
+            if (mapIcon) {
+                mapIcon.className = 'fas fa-map-marked-alt';
+                mapIcon.style.color = '#ff4757'; // Vermelho para áreas de risco
+                console.log('✅ Ícone atualizado para fa-map-marked-alt (vermelho)');
+            } else {
+                console.error('❌ Ícone não encontrado');
+                // Tenta encontrar o ícone de forma alternativa
+                this.updateIconAlternative('fa-map-marked-alt', '#ff4757');
+            }
         } else if (filterType === 'safe') {
-            if (mapTitle) mapTitle.textContent = '🟢 Mapa de Pontos Seguros';
-            if (mapSubtitle) mapSubtitle.textContent = 'Encontre locais seguros e pontos de apoio próximos';
+            if (mapTitle) {
+                mapTitle.textContent = '🟡 Mapa de Pontos Seguros';
+                console.log('✅ Título atualizado para Pontos Seguros');
+            }
+            if (mapSubtitle) {
+                mapSubtitle.textContent = 'Encontre locais seguros e pontos de apoio próximos';
+                console.log('✅ Subtítulo atualizado para Pontos Seguros');
+            }
+            if (mapIcon) {
+                mapIcon.className = 'fas fa-shield-alt';
+                mapIcon.style.color = '#FFC107'; // Amarelo para pontos seguros
+                console.log('✅ Ícone atualizado para fa-shield-alt (amarelo)');
+            } else {
+                console.error('❌ Ícone não encontrado');
+                // Tenta encontrar o ícone de forma alternativa
+                this.updateIconAlternative('fa-shield-alt', '#FFC107');
+            }
+        }
+    }
+
+    // Método alternativo para atualizar o ícone
+    updateIconAlternative(iconClass, color) {
+        console.log('🔄 Tentando método alternativo para atualizar ícone:', iconClass);
+        
+        // Tenta diferentes seletores
+        const selectors = [
+            '.map-icon i',
+            '.map-header .map-icon i',
+            '.map-modal .map-icon i',
+            '.map-overlay .map-icon i',
+            'i.fas.fa-map-marked-alt'
+        ];
+        
+        for (const selector of selectors) {
+            const icon = document.querySelector(selector);
+            if (icon) {
+                icon.className = `fas ${iconClass}`;
+                icon.style.color = color;
+                console.log('✅ Ícone atualizado com seletor alternativo:', selector);
+                return;
+            }
+        }
+        
+        console.error('❌ Não foi possível encontrar o ícone com nenhum seletor');
+        
+        // Se não encontrou, tenta novamente após um delay
+        setTimeout(() => {
+            this.forceUpdateIcon(iconClass, color);
+        }, 500);
+    }
+
+    // Força a atualização do ícone após delay
+    forceUpdateIcon(iconClass, color) {
+        console.log('🔄 Forçando atualização do ícone após delay:', iconClass);
+        
+        const icon = document.querySelector('.map-icon i');
+        if (icon) {
+            icon.className = `fas ${iconClass}`;
+            icon.style.color = color;
+            console.log('✅ Ícone atualizado com força após delay');
+        } else {
+            console.error('❌ Ícone ainda não encontrado após delay');
+        }
+    }
+
+    // Reseta o ícone para a cor padrão
+    resetIconColor() {
+        const icon = document.querySelector('.map-icon i');
+        if (icon) {
+            icon.style.color = '#ff4757'; // Cor padrão do CSS
+            console.log('🔄 Ícone resetado para cor padrão');
         }
     }
 

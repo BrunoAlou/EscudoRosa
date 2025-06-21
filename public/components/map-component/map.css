@@ -38,6 +38,19 @@
     margin-bottom: 1rem;
 }
 
+/* Cores específicas para os ícones baseados no contexto */
+.map-icon .fa-exclamation-triangle {
+    color: #ff4757 !important; /* Vermelho para áreas de risco */
+}
+
+.map-icon .fa-shield-alt {
+    color: #FFC107 !important; /* Amarelo para pontos seguros */
+}
+
+.map-icon .fa-map-marked-alt {
+    color: #ff4757 !important; /* Cor padrão para mapas */
+}
+
 .map-title {
     font-size: 1.5rem;
     font-weight: bold;
@@ -281,10 +294,6 @@
     border: none !important;
 }
 
-.safe-marker {
-    background: transparent !important;
-    border: none !important;
-}
 
 .destination-marker {
     background: transparent !important;

@@ -633,4 +633,85 @@ body {
 
 .map-overlay.active {
     display: flex; /* Só aparece quando ativo */
+}
+
+/* Legendas do mapa na tela principal */
+.map-section .risk-legend {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+    flex-wrap: wrap;
+}
+
+.map-section .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.map-section .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.map-section .legend-you {
+    background: #007bff;
+}
+
+.map-section .legend-high {
+    background: #dc3545;
+}
+
+.map-section .legend-medium {
+    background: #ffc107;
+}
+
+.map-section .legend-safe {
+    background: #28a745;
+}
+
+.map-section .legend-text {
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Responsividade para legendas na tela principal */
+@media (max-width: 768px) {
+    .map-section .risk-legend {
+        gap: 1rem;
+        padding: 0.75rem;
+    }
+    
+    .map-section .legend-item {
+        font-size: 0.8rem;
+        gap: 0.4rem;
+    }
+    
+    .map-section .legend-dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .map-section .risk-legend {
+        gap: 0.75rem;
+        padding: 0.5rem;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .map-section .legend-item {
+        font-size: 0.75rem;
+    }
 } 
